@@ -10,11 +10,13 @@ public class PlayerController : MonoBehaviour
     PlayerControls pC;
     Vector2 movement;
     Rigidbody2D rB;
+    Animator anim;
 
     private void Awake()
     {
         pC = new PlayerControls();
         rB = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     private void OnEnable()
@@ -29,16 +31,24 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        AdjustPlayerDirection();
         Move();
     }
 
     void PlayerInput()
     {
         movement = pC.Movement.Move.ReadValue<Vector2>();
+        anim.SetFloat("moveX", movement.x);
+        anim.SetFloat("moveY", movement.y);
     }
 
     void Move()
     {
         rB.MovePosition(rB.position + movement * (moveSpeed * Time.fixedDeltaTime));
+    }
+
+    void AdjustPlayerDirection()
+    {
+
     }
 }
