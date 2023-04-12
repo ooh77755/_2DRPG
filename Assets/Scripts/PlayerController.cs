@@ -5,29 +5,40 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    //[SerializeField] float moveSpeed = 1f;
+    [SerializeField] float moveSpeed = 1f;
 
-    Vector2 moveInput;
-    Rigidbody2D rb;
+    PlayerControls pC;
+    Vector2 movement;
+    Rigidbody2D rB;
 
-    private void Start()
+    private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        pC = new PlayerControls();
+        rB = GetComponent<Rigidbody2D>();
+    }
+
+    private void OnEnable()
+    {
+        pC.Enable();
     }
 
     private void Update()
     {
+        PlayerInput();
+    }
+
+    private void FixedUpdate()
+    {
         Move();
     }
 
-    void OnMove(InputValue value)
+    void PlayerInput()
     {
-        moveInput = value.Get<Vector2>();
+        movement = pC.Movement.Move.ReadValue<Vector2>();
     }
 
     void Move()
     {
-        rb.velocity = moveInput;
-        
+        rB.MovePosition(rB.position + movement * (moveSpeed * Time.fixedDeltaTime));
     }
 }
