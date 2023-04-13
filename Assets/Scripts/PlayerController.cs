@@ -49,6 +49,15 @@ public class PlayerController : MonoBehaviour
 
     void AdjustPlayerDirection()
     {
-
+        Vector3 mousePos = Input.mousePosition;
+        Vector3 playerScreenPoint = Camera.main.WorldToScreenPoint(transform.position);
+        if(mousePos.x < playerScreenPoint.x)
+        {
+            transform.localScale = new Vector2(-1f, 1f);
+        }
+        else
+        {
+            transform.localScale = new Vector2(1f, 1f);
+        }
     }
 }
