@@ -9,13 +9,14 @@ public class EnemyAI : MonoBehaviour
         Roaming
     }
 
-    State state;
-    EnemyPathfinding enemyPath;
+    private State state;
+    private EnemyPathfinding enemyPath;
+    //public Vector2 roamPos;
 
     private void Awake()
     {
-        state = State.Roaming;
         enemyPath = GetComponent<EnemyPathfinding>();
+        state = State.Roaming;
     }
 
     private void Start()
@@ -23,17 +24,17 @@ public class EnemyAI : MonoBehaviour
         StartCoroutine(RoamingRoutine());
     }
 
-    IEnumerator RoamingRoutine()
+    private IEnumerator RoamingRoutine()
     {
         while(state == State.Roaming)
         {
             Vector2 roamPos = GetRoamingPos();
-            print(roamPos);
+            enemyPath.MoveTo(roamPos);
             yield return new WaitForSeconds(2f);
         }
     }
 
-    public Vector2 GetRoamingPos()
+    private Vector2 GetRoamingPos()
     {
         return new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
     }

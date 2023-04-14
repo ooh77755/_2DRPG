@@ -4,21 +4,23 @@ using UnityEngine;
 
 public class EnemyPathfinding : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 1f;
+    [SerializeField] private float moveSpeed = 1f;
 
-    EnemyAI enemyAI;
-    Rigidbody2D rB;
+    private Rigidbody2D rB;
+    private Vector2 moveDir;
 
     private void Awake()
     {
-        enemyAI = GetComponent<EnemyAI>();
         rB = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    private void FixedUpdate()
     {
-        Vector2 roamPos = enemyAI.GetRoamingPos();
+        rB.MovePosition(rB.position + moveDir * (moveSpeed * Time.fixedDeltaTime));
+    }
 
-        rB.MovePosition(rB.position + roamPos * (moveSpeed * Time.fixedDeltaTime));
+    public void MoveTo(Vector2 targetPos)
+    {
+        moveDir = targetPos;
     }
 }
