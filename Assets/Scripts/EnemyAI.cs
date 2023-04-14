@@ -33,7 +33,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    Vector2 GetRoamingPos()
+    public Vector2 GetRoamingPos()
     {
         return new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
     }

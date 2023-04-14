@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class EnemyPathfinding : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] float moveSpeed = 1f;
+
+    EnemyAI enemyAI;
+    Rigidbody2D rB;
+
+    private void Awake()
     {
-        
+        enemyAI = GetComponent<EnemyAI>();
+        rB = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        Vector2 roamPos = enemyAI.GetRoamingPos();
+
+        rB.MovePosition(rB.position + roamPos * (moveSpeed * Time.fixedDeltaTime));
     }
 }
