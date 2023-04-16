@@ -6,6 +6,7 @@ public class Sword : MonoBehaviour
 {
     [SerializeField] GameObject slashAnimPrefab;
     [SerializeField] Transform slashAnimSpawnPoint;
+    [SerializeField] Transform weaponCollider;
     private PlayerControls pC;
     Animator anim;
     PlayerController playerCon;
@@ -32,8 +33,14 @@ public class Sword : MonoBehaviour
     void Attack()
     {
         anim.SetTrigger("Attack");
+        weaponCollider.gameObject.SetActive(true);
         slashAnim = Instantiate(slashAnimPrefab, slashAnimSpawnPoint.position, Quaternion.identity);
         slashAnim.transform.parent = this.transform.parent;
+    }
+
+    public void DoneAttackingAnim()
+    {
+        weaponCollider.gameObject.SetActive(false);
     }
 
     public void SwingUpFlipAnim()

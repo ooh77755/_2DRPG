@@ -480,6 +480,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5717473946645307386, guid: 46171e38a21f328428c80948033066a3, type: 3}
   m_PrefabInstance: {fileID: 1289975227}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1473727031 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8256946238505958236, guid: 98b74029760cac54f9e17541ad1e712f, type: 3}
+  m_PrefabInstance: {fileID: 5739328939410424785}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1648596140 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5717473946645307386, guid: 46171e38a21f328428c80948033066a3, type: 3}
@@ -709,11 +714,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6602172345687272960, guid: 33996c6172221414da48f40150dd7862, type: 3}
   m_PrefabInstance: {fileID: 1741786420}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1761265064 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8580984653034163551, guid: 98b74029760cac54f9e17541ad1e712f, type: 3}
-  m_PrefabInstance: {fileID: 5739328939410424785}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5717473948218395478
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -779,13 +779,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 12973233062296145, guid: 98b74029760cac54f9e17541ad1e712f, type: 3}
-      propertyPath: slashAnimPrefab
+      propertyPath: weaponCollider
       value: 
-      objectReference: {fileID: 2696790064991895680, guid: 4e80ae2a9cdab614a9b6e045b4e34356, type: 3}
-    - target: {fileID: 12973233062296145, guid: 98b74029760cac54f9e17541ad1e712f, type: 3}
-      propertyPath: slashAnimSpawnPoint
-      value: 
-      objectReference: {fileID: 1761265064}
+      objectReference: {fileID: 1473727031}
+    - target: {fileID: 623062496091224630, guid: 98b74029760cac54f9e17541ad1e712f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5739328939088072801, guid: 98b74029760cac54f9e17541ad1e712f, type: 3}
       propertyPath: m_Name
       value: Player
@@ -853,7 +853,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6528715926823617568, guid: 18cd9cc471806564d8d660f5a3b28f17, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.898715
+      value: 0.32
       objectReference: {fileID: 0}
     - target: {fileID: 6528715926823617568, guid: 18cd9cc471806564d8d660f5a3b28f17, type: 3}
       propertyPath: m_LocalPosition.z
