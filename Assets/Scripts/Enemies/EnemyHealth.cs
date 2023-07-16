@@ -6,7 +6,13 @@ public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] int startingHealth = 3;
     int currentHealth;
-    
+    KnockBack knockback;
+
+    private void Awake()
+    {
+        knockback = GetComponent<KnockBack>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,8 +22,8 @@ public class EnemyHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        knockback.GetKnockedBack(PlayerController.Instance.transform, 15f);
         DetectDeath();
-        print(currentHealth);
     }
 
     void DetectDeath()
