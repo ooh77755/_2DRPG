@@ -13,6 +13,11 @@ public class Flash : MonoBehaviour
         defaultMat = GetComponent<SpriteRenderer>().material;
     }
 
+    public float GetRestoreMatTime()
+    {
+        return restoreDefaultMatTime;
+    }
+
     public IEnumerator FlashRoutine()
     {
         GetComponent<SpriteRenderer>().material = flashMat;
