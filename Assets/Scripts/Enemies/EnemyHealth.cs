@@ -8,6 +8,8 @@ public class EnemyHealth : MonoBehaviour
     int currentHealth;
     KnockBack knockback;
     Flash flash;
+    float delay = 1f;
+    [SerializeField] GameObject destroyVFX;
 
     private void Awake()
     {
@@ -40,6 +42,8 @@ public class EnemyHealth : MonoBehaviour
         if(currentHealth <= 0)
         {
             Destroy(gameObject);
+            GameObject enemyExplode = Instantiate(destroyVFX, transform.position, Quaternion.identity);
+            Destroy(enemyExplode, delay);
         }
     }
 }
