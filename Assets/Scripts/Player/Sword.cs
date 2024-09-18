@@ -13,6 +13,8 @@ public class Sword : MonoBehaviour
 
     GameObject slashAnim;
 
+    Coroutine ContinuousSlashing;
+
     private void Awake()
     {
         pC = new PlayerControls();
@@ -32,10 +34,29 @@ public class Sword : MonoBehaviour
 
     void Attack()
     {
-        anim.SetTrigger("Attack");
-        weaponCollider.gameObject.SetActive(true);
-        slashAnim = Instantiate(slashAnimPrefab, slashAnimSpawnPoint.position, Quaternion.identity);
-        slashAnim.transform.parent = this.transform.parent;
+        if (Input.GetMouseButtonDown(0))
+        {
+            ContinuousSlashing = StartCoroutine(PlayerContinuousSlashing());
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            StopCoroutine(ContinuousSlashing);
+        }
+
+
+    }
+
+    IEnumerator PlayerContinuousSlashing()
+    {
+        while (true)
+        {
+            anim.SetTrigger("Attack");
+            weaponCollider.gameObject.SetActive(true);
+            slashAnim = Instantiate(slashAnimPrefab, slashAnimSpawnPoint.position, Quaternion.identity);
+            slashAnim.transform.parent = this.transform.parent;
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 
     public void DoneAttackingAnim()
