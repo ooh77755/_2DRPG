@@ -542,6 +542,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8256946238505958236, guid: 98b74029760cac54f9e17541ad1e712f, type: 3}
   m_PrefabInstance: {fileID: 5739328939410424785}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &1601561457 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1990339617075799629, guid: 98b74029760cac54f9e17541ad1e712f, type: 3}
+  m_PrefabInstance: {fileID: 5739328939410424785}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1651502571
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -780,9 +785,33 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1990339617075799629, guid: 98b74029760cac54f9e17541ad1e712f, type: 3}
+      propertyPath: lengthInSec
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1990339617075799629, guid: 98b74029760cac54f9e17541ad1e712f, type: 3}
+      propertyPath: ShapeModule.type
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1990339617075799629, guid: 98b74029760cac54f9e17541ad1e712f, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1990339617075799629, guid: 98b74029760cac54f9e17541ad1e712f, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 5739328939088072801, guid: 98b74029760cac54f9e17541ad1e712f, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5739328939088072804, guid: 98b74029760cac54f9e17541ad1e712f, type: 3}
+      propertyPath: dashVFX
+      value: 
+      objectReference: {fileID: 1601561457}
+    - target: {fileID: 5739328939088072804, guid: 98b74029760cac54f9e17541ad1e712f, type: 3}
+      propertyPath: dashSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5739328939088072805, guid: 98b74029760cac54f9e17541ad1e712f, type: 3}
       propertyPath: m_RootOrder
