@@ -102,7 +102,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Attack"",
                     ""type"": ""Button"",
-                    ""id"": ""185919cf-2e30-44c6-8c78-b3911f544639"",
+                    ""id"": ""d6449872-d883-455f-a702-380677b52041"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -112,7 +112,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""482b88c4-f858-4e3a-ad5d-24b6e393dde3"",
+                    ""id"": ""c7f96ba0-a36c-4141-8ff3-1b31acdd2105"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",

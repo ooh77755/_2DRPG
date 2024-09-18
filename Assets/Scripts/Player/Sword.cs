@@ -10,10 +10,9 @@ public class Sword : MonoBehaviour
     private PlayerControls pC;
     Animator anim;
     PlayerController playerCon;
-
     GameObject slashAnim;
-
-    Coroutine ContinuousSlashing;
+    float cooldown = 0.5f;
+    bool attackBtnDown, isAttacking = false;
 
     private void Awake()
     {
@@ -29,34 +28,42 @@ public class Sword : MonoBehaviour
 
     private void Start()
     {
-        pC.Combat.Attack.started += _ => Attack();
+        pC.Combat.Attack.started += _ => StartAttacking();
+        pC.Combat.Attack.canceled += _ => StopAttacking();
+    }
+
+    private void Update()
+    {
+        Attack();
+    }
+
+    void StartAttacking()
+    {
+        attackBtnDown = true;
+    }
+
+    void StopAttacking()
+    {
+        attackBtnDown = false;
     }
 
     void Attack()
     {
-        if (Input.GetMouseButtonDown(0))
+        if(attackBtnDown && !isAttacking)
         {
-            ContinuousSlashing = StartCoroutine(PlayerContinuousSlashing());
-        }
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            StopCoroutine(ContinuousSlashing);
-        }
-
-
-    }
-
-    IEnumerator PlayerContinuousSlashing()
-    {
-        while (true)
-        {
+            isAttacking = true;
             anim.SetTrigger("Attack");
             weaponCollider.gameObject.SetActive(true);
             slashAnim = Instantiate(slashAnimPrefab, slashAnimSpawnPoint.position, Quaternion.identity);
             slashAnim.transform.parent = this.transform.parent;
-            yield return new WaitForSeconds(0.5f);
+            StartCoroutine(AttackCooldown());
         }
+    }
+
+    IEnumerator AttackCooldown()
+    {
+        yield return new WaitForSeconds(cooldown);
+        isAttacking = false;
     }
 
     public void DoneAttackingAnim()
