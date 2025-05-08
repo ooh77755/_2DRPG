@@ -19,7 +19,15 @@ public class TransparentDetection : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            StartCoroutine(FadeRoutine(sR, transpAmount, transpFadeTime, sR.color.a));
+            StartCoroutine(FadeRoutine(sR, transpFadeTime, sR.color.a, transpAmount));
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            StartCoroutine(FadeUp(sR, transpFadeTime, 0, transpAmount));
         }
     }
 
@@ -29,8 +37,24 @@ public class TransparentDetection : MonoBehaviour
         while(elapsedTime < fadeTime)
         {
             elapsedTime += Time.deltaTime;
+
             float newAlpha = Mathf.Lerp(StartVal, targetTransp, elapsedTime / fadeTime);
             sR.color = new Color(sR.color.r, sR.color.g, sR.color.b, newAlpha);
+
+            yield return null;
+        }
+    }
+
+    IEnumerator FadeUp(SpriteRenderer sR, float fadeTime, float startValue, float targetTransparency)
+    {
+        float elapsedTime = 0;
+        while(elapsedTime < fadeTime)
+        {
+            elapsedTime += Time.deltaTime;
+
+            float oldAlpha = Mathf.Lerp(0, 1, elapsedTime / fadeTime);
+            sR.color = new Color(sR.color.r, sR.color.g, sR.color.b, oldAlpha);
+
             yield return null;
         }
     }
