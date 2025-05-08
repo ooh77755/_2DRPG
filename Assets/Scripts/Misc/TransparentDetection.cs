@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class TransparentDetection : MonoBehaviour
 {
@@ -9,17 +10,26 @@ public class TransparentDetection : MonoBehaviour
     [SerializeField] float transpFadeTime = 0.4f;
 
     SpriteRenderer sR;
+    Tilemap tM;
 
     private void Awake()
     {
         sR = GetComponent<SpriteRenderer>();
+        tM = GetComponent<Tilemap>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
         {
-            StartCoroutine(FadeRoutine(sR, transpFadeTime, sR.color.a, transpAmount));
+            if(sR)
+            {
+                StartCoroutine(FadeRoutine(sR, transpFadeTime, sR.color.a, transpAmount));
+            }
+            else if(tM)
+            {
+                StartCoroutine(FadeRoutine(tM, transpFadeTime, tM.color.a, transpAmount));
+            }
         }
     }
 
@@ -27,7 +37,14 @@ public class TransparentDetection : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            StartCoroutine(FadeRoutine(sR, transpFadeTime, sR.color.a, 1));
+            if(sR)
+            {
+                StartCoroutine(FadeRoutine(sR, transpFadeTime, sR.color.a, 1));
+            }
+            else if(tM)
+            {
+                StartCoroutine(FadeRoutine(tM, transpFadeTime, tM.color.a, 1));
+            }
         }
     }
 
@@ -45,17 +62,17 @@ public class TransparentDetection : MonoBehaviour
         }
     }
 
-    //IEnumerator FadeUp(SpriteRenderer sR, float fadeTime, float startValue, float targetTransparency)
-    //{
-    //    float elapsedTime = 0;
-    //    while(elapsedTime < fadeTime)
-    //    {
-    //        elapsedTime += Time.deltaTime;
+    IEnumerator FadeRoutine(Tilemap tM, float fadeTime, float StartVal, float targetTransp)
+    {
+        float elapsedTime = 0;
+        while (elapsedTime < fadeTime)
+        {
+            elapsedTime += Time.deltaTime;
 
-    //        float oldAlpha = Mathf.Lerp(0, 1, elapsedTime / fadeTime);
-    //        sR.color = new Color(sR.color.r, sR.color.g, sR.color.b, oldAlpha);
+            float newAlpha = Mathf.Lerp(StartVal, targetTransp, elapsedTime / fadeTime);
+            tM.color = new Color(tM.color.r, tM.color.g, tM.color.b, newAlpha);
 
-    //        yield return null;
-    //    }
-    //}
+            yield return null;
+        }
+    }
 }
