@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Singleton<PlayerController>
 {
     public bool FacingLeft { get { return facingLeft; } set { facingLeft = value; } }
-    public static PlayerController Instance;
 
     [SerializeField] float moveSpeed = 1f;
     float dashSpeed = 5f;
@@ -22,9 +21,9 @@ public class PlayerController : MonoBehaviour
     bool facingLeft = false;
     bool isDashing = false;
 
-    private void Awake()
+    protected override void Awake()
     {
-        Instance = this;
+        base.Awake();
         pC = new PlayerControls();
         rB = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
