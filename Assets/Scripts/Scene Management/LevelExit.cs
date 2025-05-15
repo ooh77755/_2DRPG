@@ -5,18 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class LevelExit : MonoBehaviour
 {
-    int currentSceneIndex;
-
-    private void Start()
-    {
-        currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-    }
+    [SerializeField] private string sceneToLoad;
+    [SerializeField] private string sceneTransitionName;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene(currentSceneIndex + 1);
+            SceneManager.LoadScene(sceneToLoad);
+            SceneManagement.Instance.SetTransitionName(sceneTransitionName);
         }
     }
+
+    
 }
