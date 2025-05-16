@@ -10,7 +10,7 @@ public class LevelEntrance : MonoBehaviour
     {
         if(transitionName == SceneManagement.Instance.SceneTransitionName)
         {
-            PlayerController.Instance.transform.position = transform.position;
+            PlayerController.Instance.transform.position = this.transform.position;
         }
     }
 }
