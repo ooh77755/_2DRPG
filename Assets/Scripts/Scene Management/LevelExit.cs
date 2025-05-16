@@ -7,7 +7,7 @@ public class LevelExit : MonoBehaviour
 {
     [SerializeField] private string sceneToLoad;
     [SerializeField] private string sceneTransitionName;
-
+    float waitToLoad = 1f;
     bool canTransition = false;
 
     private void Start()
@@ -27,10 +27,25 @@ public class LevelExit : MonoBehaviour
         
         if(collision.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene(sceneToLoad);
             SceneManagement.Instance.SetTransitionName(sceneTransitionName);
+            StartCoroutine(FadeAndLoad());
         }
     }
 
-    
+    IEnumerator FadeAndLoad()
+    {
+        UIFade.Instance.FadeToBlack();
+        yield return new WaitForSeconds(1);
+        StartCoroutine(LoadSceneRoutine());
+    }
+
+    IEnumerator LoadSceneRoutine()
+    {
+        while(waitToLoad >= 0)
+        {
+            waitToLoad -= Time.deltaTime;
+            yield return null;
+        }
+        SceneManager.LoadScene(sceneToLoad);
+    }
 }
