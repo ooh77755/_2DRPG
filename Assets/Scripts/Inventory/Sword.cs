@@ -2,68 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sword : MonoBehaviour
+public class Sword : MonoBehaviour, IWeapon
 {
     [SerializeField] GameObject slashAnimPrefab;
     [SerializeField] Transform slashAnimSpawnPoint;
     [SerializeField] Transform weaponCollider;
-    private PlayerControls pC;
+
     Animator anim;
     PlayerController playerCon;
     GameObject slashAnim;
     float cooldown = 0.5f;
-    bool attackBtnDown, isAttacking = false;
+
 
     private void Awake()
     {
-        pC = new PlayerControls();
+
         anim = GetComponent<Animator>();
         playerCon = GetComponentInParent<PlayerController>();
     }
 
-    private void OnEnable()
+    public void Attack()
     {
-        pC.Enable();
-    }
 
-    private void Start()
-    {
-        pC.Combat.Attack.started += _ => StartAttacking();
-        pC.Combat.Attack.canceled += _ => StopAttacking();
-    }
+        //isAttacking = true;
+        anim.SetTrigger("Attack");
+        weaponCollider.gameObject.SetActive(true);
+        slashAnim = Instantiate(slashAnimPrefab, slashAnimSpawnPoint.position, Quaternion.identity);
+        slashAnim.transform.parent = this.transform.parent;
+        StartCoroutine(AttackCooldown());
 
-    private void Update()
-    {
-        Attack();
-    }
-
-    void StartAttacking()
-    {
-        attackBtnDown = true;
-    }
-
-    void StopAttacking()
-    {
-        attackBtnDown = false;
-    }
-
-    void Attack()
-    {
-        if(attackBtnDown && !isAttacking)
-        {
-            isAttacking = true;
-            anim.SetTrigger("Attack");
-            weaponCollider.gameObject.SetActive(true);
-            slashAnim = Instantiate(slashAnimPrefab, slashAnimSpawnPoint.position, Quaternion.identity);
-            slashAnim.transform.parent = this.transform.parent;
-            StartCoroutine(AttackCooldown());
-        }
     }
 
     IEnumerator AttackCooldown()
     {
         yield return new WaitForSeconds(cooldown);
-        isAttacking = false;
+        ActiveWeapon.Instance.ToggleIsAttacking(false);
     }
 
     public void DoneAttackingAnim()
@@ -75,7 +48,7 @@ public class Sword : MonoBehaviour
     {
         slashAnim.gameObject.transform.rotation = Quaternion.Euler(-180f, 0, 0);
 
-        if(playerCon.FacingLeft)
+        if (playerCon.FacingLeft)
         {
             slashAnim.GetComponent<SpriteRenderer>().flipX = true;
         }
