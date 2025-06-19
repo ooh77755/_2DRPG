@@ -9,16 +9,19 @@ public class Sword : MonoBehaviour, IWeapon
     [SerializeField] Transform weaponCollider;
 
     Animator anim;
-    PlayerController playerCon;
     GameObject slashAnim;
     float cooldown = 0.5f;
 
 
     private void Awake()
     {
-
         anim = GetComponent<Animator>();
-        playerCon = GetComponentInParent<PlayerController>();
+    }
+
+    void Start()
+    {
+        weaponCollider = PlayerController.Instance.GetWeaponCollider();
+        slashAnimSpawnPoint = GameObject.Find("Slash Anim Spawn Point").transform;
     }
 
     public void Attack()
@@ -48,7 +51,7 @@ public class Sword : MonoBehaviour, IWeapon
     {
         slashAnim.gameObject.transform.rotation = Quaternion.Euler(-180f, 0, 0);
 
-        if (playerCon.FacingLeft)
+        if (PlayerController.Instance.FacingLeft)
         {
             slashAnim.GetComponent<SpriteRenderer>().flipX = true;
         }
@@ -58,7 +61,7 @@ public class Sword : MonoBehaviour, IWeapon
     {
         slashAnim.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
 
-        if (playerCon.FacingLeft)
+        if (PlayerController.Instance.FacingLeft)
         {
             slashAnim.GetComponent<SpriteRenderer>().flipX = true;
         }

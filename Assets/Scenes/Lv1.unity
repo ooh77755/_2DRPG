@@ -3605,6 +3605,11 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 2137612499}
   m_Damping: 0.5
   m_MaxWindowSize: -1
+--- !u!4 &1609957217 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8256946238505958236, guid: 98b74029760cac54f9e17541ad1e712f, type: 3}
+  m_PrefabInstance: {fileID: 5739328939410424785}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1634591966
 GameObject:
   m_ObjectHideFlags: 0
@@ -7164,6 +7169,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5739328939088072804, guid: 98b74029760cac54f9e17541ad1e712f, type: 3}
+      propertyPath: weaponCollider
+      value: 
+      objectReference: {fileID: 1609957217}
     - target: {fileID: 5739328939088072805, guid: 98b74029760cac54f9e17541ad1e712f, type: 3}
       propertyPath: m_RootOrder
       value: 4
