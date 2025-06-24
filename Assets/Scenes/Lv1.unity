@@ -6910,6 +6910,23 @@ MonoBehaviour:
       m_RotationOrder: 4
   m_CustomBlends: {fileID: 0}
   m_ParentHash: []
+--- !u!1 &2061539331 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 10667753, guid: 98b74029760cac54f9e17541ad1e712f, type: 3}
+  m_PrefabInstance: {fileID: 5739328939410424785}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2061539334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2061539331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9cb284d51de9d84582139ecc45bd400, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2069538567
 PrefabInstance:
   m_ObjectHideFlags: 0

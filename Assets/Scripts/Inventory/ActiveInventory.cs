@@ -62,7 +62,7 @@ public class ActiveInventory : MonoBehaviour
 
         GameObject weaponToSpawn = transform.GetChild(activeSlotIndex).GetComponentInChildren<InventorySlot>().GetWeaponInfo().weaponPrefab;
         GameObject newWapon = Instantiate(weaponToSpawn, ActiveWeapon.Instance.transform.position, Quaternion.identity);
-
+        ActiveWeapon.Instance.transform.rotation = Quaternion.Euler(0, 0, 0);
         //makes a child of ActiveWeapon GaOb in heirarchy
         newWapon.transform.parent = ActiveWeapon.Instance.transform;
 
